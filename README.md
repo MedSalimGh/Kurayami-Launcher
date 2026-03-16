@@ -8,3 +8,6 @@ An open-source custom League of Legends skin manager and UI launcher, complete w
 
 ## License
 MIT License. See the `LICENSE` file for more details.
+
+## Privacy Policy
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
