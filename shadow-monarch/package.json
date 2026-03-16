@@ -1,0 +1,18 @@
+{
+  "name": "shadow-monarch",
+  "version": "1.0.0",
+  "description": "Solo Leveling inspired League of Legends Skin Manager",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "author": "Shadow Monarch",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "^33.0.0"
+  },
+  "dependencies": {
+    "koffi": "^2.15.1"
+  }
+}

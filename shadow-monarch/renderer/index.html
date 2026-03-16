@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow Monarch — CSLOL Manager</title>
+    <link rel="stylesheet" href="styles/design-system.css">
+</head>
+<body>
+    <!-- Particle Background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Title Bar -->
+    <div class="titlebar">
+        <div class="titlebar-logo">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 12l3 3 8-8 8 8 3-3L12 2zm0 5l-7 7v6h4v-4h6v4h4v-6l-7-7z"/></svg>
+            SHADOW MONARCH
+        </div>
+        <div class="titlebar-spacer"></div>
+        <div class="titlebar-controls">
+            <button class="titlebar-btn" id="btn-minimize" title="Minimize">─</button>
+            <button class="titlebar-btn" id="btn-maximize" title="Maximize">□</button>
+            <button class="titlebar-btn close" id="btn-close" title="Close">✕</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-emblem">
+                    <div class="emblem-core">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 3.9l5 2.22V11c0 3.87-2.55 7.36-5 8.9-2.45-1.54-5-5.03-5-8.9V7.12l5-2.22z"/></svg>
+                    </div>
+                </div>
+                <div class="sidebar-title">Shadow Monarch</div>
+                <div class="sidebar-subtitle">Skin Manager</div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-page="dashboard">
+                    <span class="nav-icon">⚔</span>
+                    <span class="nav-label">Dashboard</span>
+                </div>
+                <div class="nav-item" data-page="skins">
+                    <span class="nav-icon">🗡</span>
+                    <span class="nav-label">My Skins</span>
+                </div>
+                <div class="nav-item" data-page="profiles">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-label">Profiles</span>
+                </div>
+                <div class="nav-item" data-page="settings">
+                    <span class="nav-icon">⚙</span>
+                    <span class="nav-label">Settings</span>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-status">
+                    <div class="status-dot idle" id="sidebar-status-dot"></div>
+                    <span id="sidebar-status-text">Ready</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- ===== DASHBOARD PAGE ===== -->
+            <div class="page active" id="page-dashboard">
+                <div class="page-header">
+                    <h1 class="page-title">⚔ <span>Command</span> Center</h1>
+                    <button class="btn-arise" id="btn-arise-main" disabled>
+                        <span>ARISE</span>
+                    </button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-total-mods">0</div>
+                        <div class="stat-label">Total Skins</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-active-mods">0</div>
+                        <div class="stat-label">Active Skins</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-profiles">0</div>
+                        <div class="stat-label">Profiles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="stat-status">Idle</div>
+                        <div class="stat-label">Patcher Status</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-16 mb-20">
+                    <div class="card" style="flex: 1; padding: 20px;">
+                        <h3 style="font-family: var(--font-heading); color: var(--purple-light); margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase;">Quick Actions</h3>
+                        <div class="flex flex-col gap-8">
+                            <button class="btn w-full" id="btn-quick-import">🗡 Import Skin</button>
+                            <button class="btn w-full" id="btn-quick-create">✦ Create New Mod</button>
+                            <button class="btn w-full" id="btn-quick-refresh">↻ Refresh Mods</button>
+                        </div>
+                    </div>
+                    <div class="card" style="flex: 1; padding: 20px;">
+                        <h3 style="font-family: var(--font-heading); color: var(--purple-light); margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase;">Current Profile</h3>
+                        <div class="select-wrapper mb-16">
+                            <select id="dash-profile-select"></select>
+                        </div>
+                        <div class="flex gap-8">
+                            <button class="btn btn-sm flex-1" id="btn-dash-save">Save</button>
+                            <button class="btn btn-sm flex-1" id="btn-dash-load">Load</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 16px;">
+                    <h3 style="font-family: var(--font-heading); color: var(--purple-light); margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase;">Session Log</h3>
+                    <div id="session-log" style="font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); max-height: 120px; overflow-y: auto; padding: 8px; background: var(--bg-tertiary); border-radius: var(--radius-sm); line-height: 1.6;">
+                        <div>Awaiting initialization...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SKINS PAGE ===== -->
+            <div class="page" id="page-skins">
+                <div class="page-header">
+                    <h1 class="page-title">🗡 <span>My</span> Skins</h1>
+                    <div class="flex gap-8">
+                        <button class="btn btn-sm" id="btn-refresh-mods">↻ Refresh</button>
+                        <button class="btn btn-sm" id="btn-create-mod">✦ Create</button>
+                        <button class="btn btn-primary btn-sm" id="btn-import-mod">⬇ Import</button>
+                    </div>
+                </div>
+
+                <!-- Drop zone -->
+                <div class="drop-zone" id="skin-drop-zone">
+                    <div class="drop-zone-icon">📦</div>
+                    <div class="drop-zone-text">Drag & drop .fantome or .zip files here to install</div>
+                </div>
+
+                <!-- Search & controls -->
+                <div class="flex items-center gap-12 mb-20">
+                    <label class="toggle" id="toggle-all-mods" title="Toggle all mods">
+                        <input type="checkbox">
+                        <div class="toggle-track"></div>
+                        <div class="toggle-thumb"></div>
+                    </label>
+                    <div class="search-bar flex-1">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-mods" placeholder="Search skins by name or description...">
+                    </div>
+                </div>
+
+                <!-- Mod Grid -->
+                <div class="mod-grid" id="mod-grid">
+                    <!-- Mod cards render here -->
+                </div>
+            </div>
+
+            <!-- ===== PROFILES PAGE ===== -->
+            <div class="page" id="page-profiles">
+                <div class="page-header">
+                    <h1 class="page-title">📋 <span>Profiles</span></h1>
+                    <button class="btn btn-primary btn-sm" id="btn-new-profile">✦ New Profile</button>
+                </div>
+                <div class="profile-list" id="profile-list">
+                    <!-- Profile cards render here -->
+                </div>
+            </div>
+
+            <!-- ===== SETTINGS PAGE ===== -->
+            <div class="page" id="page-settings">
+                <div class="page-header">
+                    <h1 class="page-title">⚙ <span>Settings</span></h1>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title">Game</div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Game Folder</div>
+                            <div class="setting-desc" id="settings-game-path">Not set</div>
+                        </div>
+                        <button class="btn btn-sm" id="btn-change-game-path">Change</button>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Auto-detect game path</div>
+                            <div class="setting-desc">Automatically find League of Legends installation</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-detect-path" checked>
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Blacklist extra gamemods</div>
+                            <div class="setting-desc">Block TFT and other game mode files</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-blacklist" checked>
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Suppress install conflicts</div>
+                            <div class="setting-desc">Skip warnings for conflicting mod files</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-suppress-conflicts">
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Ignore faulty WADs</div>
+                            <div class="setting-desc">Skip broken .wad files during overlay build</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-ignorebad">
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <div class="settings-title">System</div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Enable systray icon</div>
+                            <div class="setting-desc">Minimize to system tray on close</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-systray">
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Auto-run on start</div>
+                            <div class="setting-desc">Automatically apply skins when the app opens</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-autorun">
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Verbose logging</div>
+                            <div class="setting-desc">Enable detailed patcher output for troubleshooting</div>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="setting-verbose">
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Diagnostics</div>
+                            <div class="setting-desc">Troubleshoot issues with patcher</div>
+                        </div>
+                        <button class="btn btn-sm" id="btn-run-diag">Run Diag</button>
+                    </div>
+                    <div class="setting-row">
+                        <div>
+                            <div class="setting-label">Log file</div>
+                            <div class="setting-desc">Open log file for debugging</div>
+                        </div>
+                        <button class="btn btn-sm" id="btn-open-logs">Open Logs</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="statusbar" id="statusbar">
+        <div class="statusbar-text" id="statusbar-text">Ready</div>
+        <div class="statusbar-state" id="statusbar-state">IDLE</div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- New Profile Modal -->
+    <div class="modal-overlay" id="modal-new-profile">
+        <div class="modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <div class="modal-title">Create Profile</div>
+                <button class="btn-icon sm" onclick="closeModal('modal-new-profile')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-field">
+                    <label>Profile Name</label>
+                    <input type="text" id="new-profile-name" placeholder="Enter profile name...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm" onclick="closeModal('modal-new-profile')">Cancel</button>
+                <button class="btn btn-primary btn-sm" id="btn-create-profile-confirm">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Mod Modal -->
+    <div class="modal-overlay" id="modal-new-mod">
+        <div class="modal" style="max-width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Create New Mod</div>
+                <button class="btn-icon sm" onclick="closeModal('modal-new-mod')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="flex flex-col gap-12">
+                    <div class="input-field">
+                        <label>Mod Name (File Name)</label>
+                        <input type="text" id="new-mod-filename" placeholder="my-custom-skin">
+                    </div>
+                    <div class="input-field">
+                        <label>Display Name</label>
+                        <input type="text" id="new-mod-name" placeholder="My Custom Skin">
+                    </div>
+                    <div class="input-field">
+                        <label>Author</label>
+                        <input type="text" id="new-mod-author" placeholder="Your name">
+                    </div>
+                    <div class="input-field">
+                        <label>Version</label>
+                        <input type="text" id="new-mod-version" placeholder="1.0.0" value="1.0.0">
+                    </div>
+                    <div class="input-field">
+                        <label>Description</label>
+                        <textarea id="new-mod-desc" placeholder="Describe your mod..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm" onclick="closeModal('modal-new-mod')">Cancel</button>
+                <button class="btn btn-primary btn-sm" id="btn-create-mod-confirm">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Mod Modal -->
+    <div class="modal-overlay" id="modal-edit-mod">
+        <div class="modal" style="max-width: 640px;">
+            <div class="modal-header">
+                <div class="modal-title" id="edit-mod-title">Edit Mod</div>
+                <button class="btn-icon sm" onclick="closeModal('modal-edit-mod')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs" id="edit-mod-tabs">
+                    <div class="tab active" data-tab="info">Info</div>
+                    <div class="tab" data-tab="files">Files</div>
+                </div>
+                <div id="edit-tab-info">
+                    <div class="flex flex-col gap-12">
+                        <div class="input-field">
+                            <label>Display Name</label>
+                            <input type="text" id="edit-mod-name">
+                        </div>
+                        <div class="input-field">
+                            <label>Author</label>
+                            <input type="text" id="edit-mod-author">
+                        </div>
+                        <div class="input-field">
+                            <label>Version</label>
+                            <input type="text" id="edit-mod-version">
+                        </div>
+                        <div class="input-field">
+                            <label>Description</label>
+                            <textarea id="edit-mod-desc"></textarea>
+                        </div>
+                        <div class="input-field">
+                            <label>Home URL</label>
+                            <input type="text" id="edit-mod-home" placeholder="https://...">
+                        </div>
+                        <div class="input-field">
+                            <label>Support / Donate URL</label>
+                            <input type="text" id="edit-mod-heart" placeholder="https://...">
+                        </div>
+                        <div class="flex items-center gap-10">
+                            <label style="font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; text-transform: uppercase; font-family: var(--font-heading);">Image</label>
+                            <button class="btn btn-sm" id="btn-edit-mod-image">Choose Image</button>
+                            <span id="edit-mod-image-name" style="font-size: 12px; color: var(--text-muted);"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="edit-tab-files" class="hidden">
+                    <div class="flex gap-8 mb-16">
+                        <button class="btn btn-sm" id="btn-add-wad">Add WAD</button>
+                        <button class="btn btn-sm" id="btn-add-raw">Add RAW Folder</button>
+                        <button class="btn btn-sm" id="btn-browse-mod">Browse</button>
+                        <label class="toggle" title="Remove unknown file names" style="margin-left: auto;">
+                            <input type="checkbox" id="edit-remove-unknown" checked>
+                            <div class="toggle-track"></div>
+                            <div class="toggle-thumb"></div>
+                        </label>
+                        <span style="font-size: 12px; color: var(--text-muted); align-self: center;">Remove Unknown</span>
+                    </div>
+                    <div class="wad-list" id="edit-wad-list">
+                        <!-- WAD items render here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm" onclick="closeModal('modal-edit-mod')">Close</button>
+                <button class="btn btn-primary btn-sm" id="btn-edit-mod-apply">Apply Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal-overlay" id="modal-error">
+        <div class="modal" style="max-width: 540px;">
+            <div class="modal-header">
+                <div class="modal-title" style="color: var(--red-main);">⚠ Error</div>
+                <button class="btn-icon sm" onclick="closeModal('modal-error')">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message" style="color: var(--text-primary); margin-bottom: 10px;"></p>
+                <div class="error-trace" id="error-trace"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-sm" onclick="closeModal('modal-error')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Path Modal -->
+    <div class="modal-overlay" id="modal-game-path">
+        <div class="modal" style="max-width: 480px;">
+            <div class="modal-header">
+                <div class="modal-title">Set Game Path</div>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+                    Please select the folder containing <strong style="color: var(--text-primary);">League of Legends.exe</strong>
+                    <br><span style="font-size: 12px; color: var(--text-muted);">Usually located in: Riot Games/League of Legends/Game</span>
+                </p>
+                <button class="btn btn-primary w-full" id="btn-select-game-path">Select Game Folder</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="components/particles.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+node_modules/
+.env
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Executables and large binaries (keep the C code)
+*.exe
+*.dll
+*.so
+*.dylib
+*.wad
+*.wad.client
+*.bin
+*.tmp
+*.zip
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.sln
+*.user
