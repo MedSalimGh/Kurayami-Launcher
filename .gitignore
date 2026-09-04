@@ -1,0 +1,33 @@
+# Certificates & Secrets
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.crt
+
+# Binaries & Archives
+*.exe
+*.dll
+*.pdb
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+
+# Build outputs & caches
+bin/
+obj/
+dist/
+.vs/
+.idea/
+
+# OS / Temp
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+*.tmp
+*.log

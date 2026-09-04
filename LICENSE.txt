@@ -1,0 +1,46 @@
+================================================================================
+KURAYAMI LAUNCHER - END USER LICENSE AGREEMENT & TERMS OF USE
+================================================================================
+
+Copyright (c) 2026 Kurayami Launcher Project (Lead: BLACK STAR)
+All Rights Reserved.
+
+1. GRANT OF LICENSE
+Kurayami Launcher ("Software") is provided free of charge for personal,
+non-commercial use. You are granted a limited, non-exclusive, revocable license
+to download, install, and execute the Software on personal computing devices
+for the purpose of managing custom cosmetic skins and themes for League of Legends.
+
+2. RESTRICTIONS
+You may not:
+  a) Decompile, reverse engineer, disassemble, or attempt to derive the source
+     code of the Software's proprietary client binaries.
+  b) Distribute modified, patched, cracked, or unauthorized builds of the Software.
+  c) Use the Software to facilitate malicious activity, cheat programs, memory
+     manipulation for unfair gameplay advantage, or violate game publishers'
+     terms of service.
+  d) Rent, lease, sell, or commercialize the Software without express prior written
+     consent from the project maintainers.
+
+3. REDISTRIBUTION
+You may redistribute the official, unmodified installer ("KurayamiSetup.exe")
+provided full attribution is given to the Kurayami Launcher Project and BLACK STAR,
+and no fee or subscription is charged for access.
+
+4. DISCLAIMER OF WARRANTIES
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+5. THIRD-PARTY LICENSES & ACKNOWLEDGEMENTS
+This software includes and interfaces with third-party open-source libraries
+governed by their respective licenses:
+
+- LeagueToolkit / cslol-patcher (https://github.com/LeagueToolkit/cslol-patcher)
+  Copyright (c) 2020-2024 League Toolkit
+  Licensed under the MIT License.
+
+================================================================================
