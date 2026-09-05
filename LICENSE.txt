@@ -1,0 +1,73 @@
+================================================================================
+KURAYAMI LAUNCHER - END USER LICENSE AGREEMENT & TERMS OF USE
+================================================================================
+
+Copyright (c) 2026 Kurayami Launcher Project (Lead: BLACK STAR)
+All Rights Reserved.
+
+1. GRANT OF LICENSE
+Kurayami Launcher ("Software") is provided free of charge for personal,
+non-commercial use. You are granted a limited, non-exclusive, revocable license
+to download, install, and execute the Software on personal computing devices
+for the purpose of managing custom cosmetic skins and themes for League of Legends.
+
+2. RESTRICTIONS
+You may not:
+  a) Decompile, reverse engineer, disassemble, or attempt to derive the source
+     code of the Software's proprietary client binaries.
+  b) Distribute modified, patched, cracked, or unauthorized builds of the Software.
+  c) Use the Software to facilitate malicious activity, cheat programs, memory
+     manipulation for unfair gameplay advantage, or violate game publishers'
+     terms of service.
+  d) Rent, lease, sell, or commercialize the Software without express prior written
+     consent from the project maintainers.
+
+3. REDISTRIBUTION
+You may redistribute the official, unmodified installer ("KurayamiSetup.exe")
+provided full attribution is given to the Kurayami Launcher Project and BLACK STAR,
+and no fee or subscription is charged for access.
+
+4. DISCLAIMER OF WARRANTIES
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE
+USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+5. THIRD-PARTY LICENSES & ACKNOWLEDGEMENTS
+Kurayami Launcher interfaces with or incorporates third-party open-source
+components. Each component is subject to its respective copyright notice
+and open-source license:
+
+  1. LeagueToolkit / cslol-tools (https://github.com/LeagueToolkit/cslol-patcher)
+     Copyright (c) 2020-2024 League Toolkit
+     Licensed under the MIT License / LTK Patcher License.
+
+  2. SharpCompress (https://github.com/adamhathcock/sharpcompress)
+     Copyright (c) 2014-2024 Adam Hathcock
+     Licensed under the MIT License.
+
+  3. ZstdSharp (https://github.com/oleg-st/ZstdSharp)
+     Copyright (c) 2021-2024 Oleg Kozlov
+     Licensed under the MIT License.
+
+  4. Extended WPF Toolkit (https://github.com/xceedsoftware/wpftoolkit)
+     Copyright (c) 2007-2024 Xceed Software Inc.
+     Licensed under the Xceed Community License.
+
+  5. WpfAnimatedGif (https://github.com/XamlAnimatedGif/WpfAnimatedGif)
+     Copyright (c) 2014 Thomas Levesque
+     Licensed under the Apache License, Version 2.0.
+
+  6. SixLabors ImageSharp (https://github.com/SixLabors/ImageSharp)
+     Copyright (c) SixLabors
+     Licensed under Apache License 2.0 / SixLabors Split License.
+
+6. RIOT GAMES DISCLAIMER
+Kurayami Launcher isn't endorsed by Riot Games and doesn't reflect the views or
+opinions of Riot Games or anyone officially involved in producing or managing
+Riot Games properties. League of Legends, Riot Games, and all associated properties
+are trademarks or registered trademarks of Riot Games, Inc.
+
+================================================================================
